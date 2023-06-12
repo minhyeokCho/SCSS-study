@@ -1,0 +1,77 @@
+.ani {
+	text-decoration: none;
+
+	&::before{
+		content: '"';
+	}
+
+	&::after{
+		content: '"';
+	}
+}
+
+// @extend
+// 동일한 속성일때 extend 사용
+%ext{
+	border:1px solid #000;
+	background-color:skyblue;
+	font-size: 20px;
+}
+
+//@mixin
+//속성은 같지만 값이 다를 경우 mixin사용
+
+@mixin mx1($bg, $fs){
+	background-color:$bg;
+	padding: 20px;
+	font-size: $fs;
+	@content;
+}
+
+@mixin mx2($cls-name, $bg) {
+	.#{$cls-name}{
+		background-color:$bg;
+	}
+}
+
+.ani1 {
+	color:orange;
+	@extend %ext;
+	@include mx1 (#000, 38px);
+}
+.ani2 {
+	color:rgb(72, 255, 0);
+	@extend %ext;
+	@include mx1(#ddd, 22px){
+		border:3px solid orange;
+	};
+}
+
+
+.tit {
+	@include mx1(#965252, 28px){
+		margin-top: 20px;
+	};
+}
+
+@include mx2('ccc',blue);
+
+
+//<!-- 리스트 목록형 변수 -->
+$box-types : ('big', 'mid', 'sm');
+$bgs : (red, green, blue);
+.box {
+	background-color: #aaa;
+	$i : 1;
+	.box-#{nth($box-types,1)}{
+		font-size: 32px;
+	}
+
+	@each $bt in $box-types {
+		.box-#{$bt}{
+			font-size: #{3 - 0.3 * $i}em;
+			background-color: nth($bgs, $i);
+		}
+		$i : $i + 1;
+	}
+}

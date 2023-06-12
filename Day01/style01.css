@@ -1,0 +1,43 @@
+@charset "UTF-8";
+/*
+
+#변수 규칙
+
+1. $로 시작
+2. 영문,숫자, _ , - , 만가능
+
+*/
+body {
+  background-color: #ccc;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #111;
+  color: skyblue;
+  background-color: rgb(126, 126, 233);
+}
+
+.box + .box {
+  /*
+  	중괄호 안에서 변수 선언시
+  	지역 변수로 사용됨
+  	$spacer10px : vars.$spacer * 2;
+  */
+  margin-top: 10px;
+}
+
+#box5 {
+  background-color: rgb(126, 126, 233);
+  margin-top: 20px;
+}
+
+.item {
+  padding: 20px;
+  border: 1px solid #111;
+  border-radius: 10px;
+}
+.item .item {
+  color: red;
+}/*# sourceMappingURL=style01.css.map */

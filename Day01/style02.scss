@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+@use 'sass:color'; //sass내장 함수
+
+//@function 함수이름() {@return}
+
+/*
+	함수이름 $로 시작 X
+*/
+
+
+@function fn1($p1, $p2) {
+	$var: 3px;
+
+	@return $var + $p1 + $p2;
+}
+
+@function get_bg($text-color){
+	$l : color.lightness($text-color); //밝기를 구하는 함수
+	@debug $l;
+	$bg: lighten($text-color ,30%);
+	@if $l >= 50% {
+		$bg : darken($text-color, 50%)
+	}@else {
+		$bg : lighten($text-color, 50%) //10%만큼 밝게
+	}
+	@return $bg;
+}
+
+.box {
+	border:fn1(5px, 10px) solid #111; //함수의 실행은 결국 값
+}
+
+%box-style {
+	width: 100px;
+	height: 100px;
+	font-size: 40px;
+	border:5px solid #000;
+}
+
+/*
+	공통된 CSS는 @extend로 정의
+*/
+
+.box1 {
+	@extend %box-style;
+	$tc : #9c7070;
+	color: $tc;
+	background-color: get_bg($tc);
+}
+.box2 {
+	@extend %box-style;
+	$tc: #ddd;
+	color: $tc;
+	background-color: #333;
+	background-color: get_bg($tc);
+}
+
+
+
+
+
+
+
+
+
+
+
+

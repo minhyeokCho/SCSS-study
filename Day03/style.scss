@@ -1,0 +1,53 @@
+$icon-types : (
+	'r':#ff0000,
+	'g': #00ff00,
+	'b':#0000ff
+);
+
+$device-type : (
+	'phone':500px,
+	'tablet' : 900px,
+	'desktop' : 1200px
+);
+
+@mixin mq($dt) {
+	$break : map-get($device-type, $dt);
+	@media screen and (max-width:$break){
+		@content
+	}
+};
+
+header{
+	h1{
+		@include mq('desktop'){
+			font-size: 32px;
+		};
+		@include mq('tablet'){
+			font-size: 28px;
+		};
+		@include mq('phone'){
+			font-size: 20px;
+		};
+
+
+	}
+}
+
+h1 {
+	font-size: 36px;
+	color : map-get($icon-types, 'r');
+
+}
+
+.with-icon {
+	display: flex; align-items: center;
+}
+@each $k, $v in $icon-types {
+	.icon-#{$k}::before{
+		content:'';
+		display: inline-block;
+		width: 30px;
+		height: 30px;
+		background-color:$v;
+	}
+}
